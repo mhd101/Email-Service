@@ -28,5 +28,29 @@ class EmailService{
                 attempts++;
             }
         }
+
+        // if Provider A is failed, then switch to provider B
+        if(!success){
+            try {
+                this.status.set(email.id, 'Retrying, Fallback Used!!');
+                await this.ProviderB.sendEmail(email.to, email.subject, email.body);
+                success = true;
+                this.status.set(email.id, 'Sent Mail using Provider B!!');
+            } catch {
+                this.status.set(email.id, 'Failed to send Mail!!');
+                return "Failed";
+            }
+        }
+
+        this.sentEmails.add(email.id);
+        return this.status.get(email.id);
+    }
+
+    delay(md){
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    getStatus(id){
+        return this.status.get(id);
     }
 }
