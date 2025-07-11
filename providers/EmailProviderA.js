@@ -6,7 +6,7 @@ class EmailProviderA extends EmailProvider {
 
         console.log("Sending email using provider A");
         let flag = 1;
-        if(flag == 1){ // explicity failing provider A
+        if(flag == 1){ // failing provider A
             throw new Error("Sending email failed using provider A");
         }
         

@@ -16,6 +16,7 @@ exports.sendEmail = async (req, res) => {
             error: "Missing Email fields !!"
         })
     }
+    
     try {
         const status = await Service.send({id, to, subject, body});
         res.json({

@@ -25,7 +25,7 @@ class EmailService {
         while (attempts <= 3 && !success) {
             try {
                 this.status.set(email.id, 'Retrying');
-                console.log(`Retrying, sending email using provider A (Attempt: ${attempts})`)
+                console.log(`Status: Retrying, sending email using provider A (Attempt: ${attempts})`)
                 await this.ProviderA.sendEmail(email.to, email.subject, email.body);
                 success = true;
                 this.status.set(email.id, 'Sent email using provider A');
